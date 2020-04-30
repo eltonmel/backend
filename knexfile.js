@@ -1,4 +1,4 @@
-const db = require('./.env');
+const { db } = require('./.env');
 
 module.exports = {
   client: 'postgresql',
@@ -9,7 +9,7 @@ module.exports = {
   },
   migrations: {
     tableName: 'knex_project_node',
-    directory: 'Migrations',
+    directory: './src/Database/Migrations',
   },
   useNullAsDefault: true,
 };
