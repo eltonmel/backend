@@ -8,6 +8,8 @@ app.db = db;
 
 consign()
   .then('./src/Config/Middlewares.js')
+  .then('./src/Validations')
+  .then('./src/Controllers')
   .then('./src/Config/Routes.js')
   .into(app);
 
