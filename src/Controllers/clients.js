@@ -1,5 +1,5 @@
 module.exports = (app) => {
-  const { exists } = app.src.Validations.validations;
+  const { exists } = app.src.Validations.Validate;
 
   const save = async (req, res) => {
     const { cpf_cnpj, name, address, comp, phone, email } = req.body;
