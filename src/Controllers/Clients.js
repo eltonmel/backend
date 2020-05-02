@@ -28,7 +28,7 @@ module.exports = (app) => {
       try {
         isSet(clientFromDb, 'Cliente não cadastrado');
         isNotSet(
-          clientFromDb.updated_at,
+          clientFromDb.deleted_at,
           'Cliente está excluído e não pode ser alterado'
         );
       } catch (msg) {
