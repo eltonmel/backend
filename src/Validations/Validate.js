@@ -1,11 +1,11 @@
 module.exports = (app) => {
-  function exists(value, msg) {
+  function isSet(value, msg) {
     if (!value) throw msg;
     if (Array.isArray(value) && value.length === 0) throw msg;
     if (typeof value === 'string' && !value.trim()) throw msg;
   }
 
-  function notExists(value, msg) {
+  function isNotSet(value, msg) {
     try {
       exists(value, msg);
     } catch (msg) {
@@ -14,5 +14,9 @@ module.exports = (app) => {
     throw msg;
   }
 
-  return { exists, notExists };
+  function isNumeric(value, label) {
+    if (isNaN(value)) throw `Valor numérico obrigatório ${label}`;
+  }
+
+  return { isSet, isNotSet, isNumeric };
 };

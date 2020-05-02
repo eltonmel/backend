@@ -1,12 +1,12 @@
 module.exports = (app) => {
-  const { exists } = app.src.Validations.Validate;
+  const { isSet } = app.src.Validations.Validate;
 
   const save = async (req, res) => {
     const { cpf_cnpj, name, address, comp, phone, email } = req.body;
     const { id } = req.params;
 
     try {
-      exists(name, 'Nome não informado');
+      isSet(name, 'Nome não informado');
     } catch (msg) {
       return res.status(400).send(msg);
     }
@@ -70,14 +70,14 @@ module.exports = (app) => {
       const { id } = req.params;
 
       const client = await app.db('clients').select().where({ id }).first();
-      exists(client, 'Cliente não cadastrado');
+      isSet(client, 'Cliente não cadastrado');
 
       const rowsUpdated = await app
         .db('clients')
         .update({ deleted_at: new Date(Date.now() - 1000 * 60 * 60 * 3) })
         .whereNull('deleted_at')
         .where({ id });
-      exists(rowsUpdated, 'Cliente já está excluido');
+      isSet(rowsUpdated, 'Cliente já está excluido');
 
       res.status(204).send();
     } catch (msg) {
