@@ -30,7 +30,7 @@ module.exports = (app) => {
     }
 
     if (product.id) {
-      productFromDb = await app
+      const productFromDb = await app
         .db('products')
         .select('deleted_at')
         .where({ id: product.id })
@@ -113,12 +113,11 @@ module.exports = (app) => {
     const product = await app
       .db('products')
       .where({ id: req.params.id })
-      .whereNull('deleted_at')
-      .first()
-      .catch((err) => res.status(500).send(err));
+      .first();
 
     try {
       isSet(product, 'Produto não cadastrado');
+      isNotSet(product.deleted_at, 'Produto está excluído');
       res.json(product);
     } catch (msg) {
       res.status(400).send(msg);

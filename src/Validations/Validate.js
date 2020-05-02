@@ -7,7 +7,7 @@ module.exports = (app) => {
 
   function isNotSet(value, msg) {
     try {
-      exists(value, msg);
+      isSet(value, msg);
     } catch (msg) {
       return;
     }
