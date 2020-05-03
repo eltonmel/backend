@@ -1,18 +1,26 @@
-const { db } = require('./.env');
-
 module.exports = {
-  client: 'postgresql',
-  connection: db,
-  pool: {
-    min: 2,
-    max: 10,
+  development: {
+    client: 'postgresql',
+    connection: process.env.DATABASE_URL_DEV,
+    migrations: {
+      tableName: 'knex_project_node',
+      directory: './src/Database/Migrations',
+    },
+    seeds: {
+      directory: './src/Database/Seeds',
+    },
+    useNullAsDefault: true,
   },
-  migrations: {
-    tableName: 'knex_project_node',
-    directory: './src/Database/Migrations',
+  production: {
+    client: 'postgresql',
+    connection: process.env.DATABASE_URL,
+    migrations: {
+      tableName: 'knex_project_node',
+      directory: './src/Database/Migrations',
+    },
+    seeds: {
+      directory: './src/Database/Seeds',
+    },
+    useNullAsDefault: true,
   },
-  seeds: {
-    directory: './src/Database/Seeds',
-  },
-  useNullAsDefault: true,
 };

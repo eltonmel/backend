@@ -1,6 +1,8 @@
 const express = require('express');
 const consign = require('consign');
 
+require('dotenv/config');
+
 const app = express();
 const db = require('./src/Config/Database');
 
@@ -13,6 +15,6 @@ consign()
   .then('./src/Config/Routes.js')
   .into(app);
 
-app.listen(5000, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log('Backend executando...');
 });
